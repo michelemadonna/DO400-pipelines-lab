@@ -10,16 +10,18 @@ pipeline {
             steps {
                 sh './mvnw test -D testGroups=unit'
             }
-        }
-        stage('Integration tests...') {
-          when {
+          }
+          stage('Integration tests...') {
+            when {
               expression { return params.RUN_INTEGRATION_TESTS }
-          }
-          steps {
+            }
+            steps {
               sh './mvnw test -D testGroups=integration'
-          }
-        }
-        stage('Build') {
+            }
+          }  
+      }
+    }
+    stage('Build') {
           steps {
             script {
               try {
@@ -30,8 +32,7 @@ pipeline {
               }
             }
           }
-        }
       }
+      
     }
-  }
 }
